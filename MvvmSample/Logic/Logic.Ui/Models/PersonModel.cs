@@ -1,13 +1,11 @@
 ﻿namespace codingfreaks.blogsamples.MvvmSample.Logic.Ui.Models
 {
+    using BaseTypes;
+    using GalaSoft.MvvmLight.Command;
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.Diagnostics;
     using System.Linq;
-
-    using BaseTypes;
-
-    using GalaSoft.MvvmLight.Command;
 
     /// <summary>
     /// Encapsulates the complete data and ui-logic for one single person.
@@ -24,10 +22,10 @@
             base.InitCommands();
             OkCommand = new RelayCommand(
                 () =>
-                {
-                    Trace.WriteLine("OK");
-                },
-                () => IsOk);
+                        {
+                            Trace.WriteLine("OK");
+                        },
+                        () => IsOk);
         }
 
         /// <summary>
@@ -39,7 +37,7 @@
             OkCommand.RaiseCanExecuteChanged();
         }
 
-        #endregion
+        #endregion methods
 
         #region properties
 
@@ -56,6 +54,9 @@
         /// <summary>
         /// The firstname of the person.
         /// </summary>
+        /// <remarks>
+        /// 通过特性来定义错误提示信息 以及限制长度值
+        /// </remarks>
         [Required(AllowEmptyStrings = false, ErrorMessage = "First name must not be empty.")]
         [MaxLength(20, ErrorMessage = "Maximum of 20 characters is allowed.")]
         public string Firstname { get; set; }
@@ -71,6 +72,6 @@
         /// </summary>
         public RelayCommand OkCommand { get; private set; }
 
-        #endregion
+        #endregion properties
     }
 }
