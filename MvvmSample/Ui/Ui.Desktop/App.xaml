@@ -10,9 +10,8 @@
              xmlns:Desktop="clr-namespace:codingfreaks.blogsamples.MvvmSample.Ui.Desktop">
     <Application.Resources>
         <ResourceDictionary>
-            <UiLogic:ViewModelLocator x:Key="Locator"
-                                      d:IsDataSource="True" />
-            <Desktop:MessageListener x:Key="MessageListener"  />
+            <UiLogic:ViewModelLocator x:Key="Locator" d:IsDataSource="True" />
+            <Desktop:MessageListener x:Key="MessageListener" />
             <Converters:AgeToBrushConverter x:Key="AgeToBrushConverter" />
             <!-- Brushes and colors -->
             <SolidColorBrush x:Key="HintBrúsh" Color="#FF429E42" />

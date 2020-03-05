@@ -20,7 +20,7 @@ namespace codingfreaks.blogsamples.MvvmSample.Ui.Desktop
             InitMessenger();
         }
 
-        #endregion
+        #endregion constructors and destructors
 
         #region methods
 
@@ -33,18 +33,18 @@ namespace codingfreaks.blogsamples.MvvmSample.Ui.Desktop
             Messenger.Default.Register<OpenChildWindowMessage>(
                 this,
                 msg =>
-                {
-                    var window = new ChildWindow();
-                    var model = window.DataContext as ChildViewModel;
-                    if (model != null)
-                    {
-                        model.MessageFromParent = msg.SomeText;
-                    }
-                    window.ShowDialog();
-                });
+                        {
+                            var window = new ChildWindow();
+                            var model = window.DataContext as ChildViewModel;
+                            if (model != null)
+                            {
+                                model.MessageFromParent = msg.SomeText;
+                            }
+                            window.ShowDialog();
+                        });
         }
 
-        #endregion
+        #endregion methods
 
         #region properties
 
@@ -53,6 +53,6 @@ namespace codingfreaks.blogsamples.MvvmSample.Ui.Desktop
         /// </summary>
         public bool BindableProperty => true;
 
-        #endregion
+        #endregion properties
     }
 }
