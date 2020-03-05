@@ -3,9 +3,8 @@ using System.Linq;
 
 namespace codingfreaks.blogsamples.MvvmSample.Ui.TestConsole
 {
-    using System.ComponentModel;
-
     using PropertyChanged;
+    using System.ComponentModel;
 
     /// <summary>
     /// A test showing the usage of <see cref="INotifyPropertyChanged" />.
@@ -19,7 +18,7 @@ namespace codingfreaks.blogsamples.MvvmSample.Ui.TestConsole
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
-        #endregion
+        #endregion events
 
         #region properties
 
@@ -39,6 +38,6 @@ namespace codingfreaks.blogsamples.MvvmSample.Ui.TestConsole
         [DoNotNotify]
         public bool SomeSecretProperty { get; set; }
 
-        #endregion
+        #endregion properties
     }
 }
