@@ -1,5 +1,10 @@
 namespace codingfreaks.blogsamples.MvvmSample.Logic.Ui
 {
+    using BaseTypes;
+    using GalaSoft.MvvmLight.Command;
+    using GalaSoft.MvvmLight.Threading;
+    using Messages;
+    using Models;
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
@@ -7,15 +12,6 @@ namespace codingfreaks.blogsamples.MvvmSample.Logic.Ui
     using System.Linq;
     using System.Threading.Tasks;
     using System.Windows.Data;
-
-    using BaseTypes;
-
-    using GalaSoft.MvvmLight.Command;
-    using GalaSoft.MvvmLight.Threading;
-
-    using Messages;
-
-    using Models;
 
     /// <summary>
     /// Contains logic for the main view of the UI.
@@ -29,11 +25,13 @@ namespace codingfreaks.blogsamples.MvvmSample.Logic.Ui
         /// </summary>
         public MainViewModel()
         {
+            //设计状态下
             if (IsInDesignMode)
             {
                 WindowTitle = "MvvmSample (Design)";
                 Progress = 30;
             }
+            //运行状态下
             else
             {
                 WindowTitle = "MvvmSample";
@@ -45,6 +43,7 @@ namespace codingfreaks.blogsamples.MvvmSample.Logic.Ui
                             {
                                 while (Progress < 100)
                                 {
+                                    //异步执行
                                     DispatcherHelper.RunAsync(() => Progress += 5);
                                     Task.Delay(100).Wait();
                                 }
@@ -89,22 +88,27 @@ namespace codingfreaks.blogsamples.MvvmSample.Logic.Ui
                         }
                     }
                 };
-                OpenChildCommand = new RelayCommand(() => MessengerInstance.Send(new OpenChildWindowMessage("Hello Child!")));
+                //打开子窗口命令
+                OpenChildCommand = new RelayCommand(() =>
+                    MessengerInstance.Send(new OpenChildWindowMessage("Hello Child!")));
+
                 SetSomeDateCommand = new RelayCommand<PersonModel>(person => person.Birthday = DateTime.Now.AddYears(-20));
+
+                //添加新Person命令
                 AddPersonCommand = new RelayCommand(
                     () =>
-                    {
-                        var newPerson = new PersonModel
-                        {
-                            Firstname = "Z(Firstname)"
-                        };
-                        Persons.Add(newPerson);
-                        PersonModel = newPerson;
-                    });
+                            {
+                                var newPerson = new PersonModel
+                                {
+                                    Firstname = "Z(Firstname)"
+                                };
+                                Persons.Add(newPerson);
+                                PersonModel = newPerson;
+                            });
             }
         }
 
-        #endregion
+        #endregion constructors and destructors
 
         #region methods
 
@@ -126,7 +130,7 @@ namespace codingfreaks.blogsamples.MvvmSample.Logic.Ui
             PersonsView.Refresh();
         }
 
-        #endregion
+        #endregion methods
 
         #region properties
 
@@ -173,6 +177,6 @@ namespace codingfreaks.blogsamples.MvvmSample.Logic.Ui
         /// </summary>
         private ObservableCollection<PersonModel> Persons { get; }
 
-        #endregion
+        #endregion properties
     }
 }
